@@ -13,7 +13,7 @@ const app = express();
 
 db.connection();
 app.use(cors({
-  origin: "*",
+  origin: process.env.CLIENT_HOST,
   credentials: true
 }))
 app.use(cookieParser());
