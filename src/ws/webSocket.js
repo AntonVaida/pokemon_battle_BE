@@ -11,7 +11,6 @@ export const setupWebSocket = (server) => {
 
       verifyAccessToken({ws, data, req})
 
-      console.log("Check")
       switch (data.type) {
         case "JOIN_GAME":
           gameController.joinGame({
