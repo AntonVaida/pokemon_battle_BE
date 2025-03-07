@@ -29,3 +29,5 @@ const server = app.listen(PORT, () => {
 })
 
 setupWebSocket(server)
+
+export default app;
