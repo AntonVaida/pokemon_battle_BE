@@ -13,13 +13,16 @@ const app = express();
 
 db.connection();
 app.use(cors({
-  origin: process.env.CLIENT_HOST,
+  origin: "*",
   credentials: true
 }))
 app.use(cookieParser());
 app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/pokemon', pokemonRouter)
+app.get("/", async (req, res) => {
+  res.send("HELLO WORLD!")
+})
 
 const server = app.listen(PORT, () => {
   console.log('SERVER IS RUNNING');
