@@ -12,11 +12,11 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 db.connection();
+
 app.use(cors({
-  origin: process.env.CLIENT_HOST || 'https://pokemon-battle-fe.vercel.app',
+  origin: process.env.CLIENT_HOST || '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(cookieParser());
 app.use(express.json());
@@ -27,7 +27,7 @@ app.get("/", async (req, res) => {
 })
 
 const server = app.listen(PORT, () => {
-  console.log('SERVER IS RUNNING');
+  console.log('SERVER IS RUNNING', `CORS ALLOW  => ${process.env.CLIENT_HOST}`);
 })
 
 setupWebSocket(server)
