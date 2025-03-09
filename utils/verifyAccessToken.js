@@ -7,6 +7,7 @@ export const verifyAccessToken = async ({ws, data, req}) => {
   let decodedUser = null;
 
   try {
+    console.log('verifyAccessToken', token)
     if (!token || token === "null") {
       throw new Error("AccessToken required");
     }
