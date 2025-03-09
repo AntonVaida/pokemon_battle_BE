@@ -15,29 +15,8 @@ const verifySignature = async (req, res) => {
   try {
     const { address, signature } = req.body;
     const data = await userService.verify({address, signature})
-
-    res.cookie("accessToken", data?.token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-      maxAge: 35 * 60 * 1000,
-    });
     
-    res.json({ address: data?.address, nonce: data?.message });
-  } catch (error) {
-    res.status(500).json({ message: 'Authentication failed' });
-  }
-}
-
-const logout = async (req, res) => {
-  try {
-    res.cookie("accessToken", "", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "None",
-    });
-
-    res.sendStatus(200);
+    res.json({ address: data?.address, nonce: data?.message, token: data?.token});
   } catch (error) {
     res.status(500).json({ message: 'Authentication failed' });
   }
@@ -46,5 +25,4 @@ const logout = async (req, res) => {
 export const authController = {
   getNonce,
   verifySignature,
-  logout
 }

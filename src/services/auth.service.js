@@ -8,7 +8,7 @@ const generateToken = (address) => {
     throw new Error('JWT_SECRET must be defined')
   }
 
-  return jwt.sign({ address }, process.env.JWT_SECRET);
+  return jwt.sign({ address }, process.env.JWT_SECRET, { expiresIn: "1h" });
 };
 
 const addNewUser = async({name, sessionToken}) => {
