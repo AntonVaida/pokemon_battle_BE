@@ -17,10 +17,10 @@ const verifySignature = async (req, res) => {
     const data = await userService.verify({address, signature})
 
     res.cookie("accessToken", data?.token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "Lax",
-        maxAge: 35 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+      maxAge: 35 * 60 * 1000,
     });
     
     res.json({ address: data?.address, nonce: data?.message });
@@ -33,9 +33,8 @@ const logout = async (req, res) => {
   try {
     res.cookie("accessToken", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
-      expires: new Date(0) 
+      secure: true,
+      sameSite: "None",
     });
 
     res.sendStatus(200);
