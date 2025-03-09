@@ -23,12 +23,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/pokemon', pokemonRouter)
-app.get("/", async (req, res) => {
-  res.send("HELLO WORLD!")
-})
 
 const server = app.listen(PORT, () => {
-  console.log('SERVER IS RUNNING', `CORS ALLOW  => ${process.env.CLIENT_HOST}`);
+  console.log('SERVER IS RUNNING');
 })
 
 setupWebSocket(server)
