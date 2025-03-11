@@ -2,12 +2,12 @@ import jwt from "jsonwebtoken";
 import { getTokenFromRequest } from "./getTokenFromRequest.js";
 
 export const verifyAccessToken = async ({ws, data, req}) => {
-  const token = getTokenFromRequest(req);
+  const accessToken = getTokenFromRequest(req);
   
   let decodedUser = null;
 
   try {
-    if (!token || token === "null") {
+    if (!accessToken || accessToken === "null") {
       throw new Error("AccessToken required");
     }
 
@@ -15,7 +15,7 @@ export const verifyAccessToken = async ({ws, data, req}) => {
       throw new Error('JWT_SECRET must be defined')
     }
 
-    decodedUser = jwt.verify(token, process.env.JWT_SECRET);
+    decodedUser = jwt.verify(accessToken, process.env.JWT_SECRET);
 
     if (typeof decodedUser !== "object" || decodedUser === null) {
       throw new Error("Invalid accessToken format");
